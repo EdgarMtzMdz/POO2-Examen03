@@ -23,7 +23,7 @@ namespace PruebaEntityFrameworkCore.Controllers
             var list = _context.CategoryToys.Select(model => new CategoryModel()
             {
                 Id = model.Id,
-                Name = model.Name,
+                Name = model.NameCategory,
                 Description = model.Description
             }).ToList();
 
@@ -45,7 +45,7 @@ namespace PruebaEntityFrameworkCore.Controllers
 
             var entity = new Category();
             entity.Id = new Guid();
-            entity.Name = model.Name;
+            entity.NameCategory = model.Name;
             entity.Description = model.Description;
 
             this._context.CategoryToys.Add(entity);
@@ -69,7 +69,7 @@ namespace PruebaEntityFrameworkCore.Controllers
             //Se asigna la info de la BD al MODELO.
             CategoryModel model = new CategoryModel();
             model.Id = entity.Id;
-            model.Name = entity.Name;
+            model.Name = entity.NameCategory;
             model.Description = entity.Description;
 
             //PASAMOS LA INFORMACION AL MODELO
@@ -95,7 +95,7 @@ namespace PruebaEntityFrameworkCore.Controllers
             }
 
             //REmplaza lo del modelo en el objeto de la BD
-            entity.Name = model.Name;
+            entity.NameCategory = model.Name;
             entity.Description = model.Description;
 
             //Actualiza y guarda
@@ -119,7 +119,7 @@ namespace PruebaEntityFrameworkCore.Controllers
 
             var model = new CategoryModel();
             model.Id = entity.Id;
-            model.Name = entity.Name;
+            model.Name = entity.NameCategory;
             model.Description = entity.Description;
 
             return View(model);

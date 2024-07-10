@@ -12,12 +12,28 @@ namespace POO_Examen3
     {
         public ApplicationDbContext(DbContextOptions options) : base(options)
         {
-            AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+            
         }
 
         public DbSet<Category> CategoryToys { get; set; }
 
         public DbSet<Kind> KindToys { get; set;}
         public DbSet<Toy> Toys { get; set;}
+
+         protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        base.OnModelCreating(modelBuilder);
+
+        
+        modelBuilder.Entity<Toy>()
+            .HasOne(t => t.Category)
+            .WithMany(c => c.Toys)
+            .HasForeignKey(t => t.Id);
+
+        modelBuilder.Entity<Toy>()
+            .HasOne(t => t.Kind)
+            .WithMany(k => k.Toys)
+            .HasForeignKey(t => t.Id);
+    }
     }
 }

@@ -188,5 +188,26 @@ namespace POO_Examen3.Controllers
             return View(modelo);
         }
 
+        public async Task<IActionResult> HacerAdmin(string email)
+        {
+            var user = await _userManager.FindByEmailAsync(email);
+            if (user != null)
+            {
+                await _userManager.AddToRoleAsync(user, "Admin");
+            }
+            return RedirectToAction("UserList");
+        }
+
+        public async Task<IActionResult> RemoverAdmin(string email)
+        {
+            var user = await _userManager.FindByEmailAsync(email);
+            if (user != null)
+            {
+                await _userManager.RemoveFromRoleAsync(user, "Admin");
+            }
+            return RedirectToAction("UserList");
+        }
+
+
     }
 }

@@ -21,8 +21,11 @@ builder.Services.AddControllersWithViews(
 builder.Services.AddControllersWithViews();
 
 
-builder.Services.AddDbContext<ApplicationDbContext>(opciones 
- => opciones.UseNpgsql("name=Connection"));
+//builder.Services.AddDbContext<ApplicationDbContext>(opciones 
+ //=> opciones.UseNpgsql("name=MyConnection"));
+
+builder.Services.AddDbContext<ApplicationDbContext>(opc =>
+opc.UseSqlServer("name=MyConnection"));
 
   builder.Services.AddAuthentication();
 
